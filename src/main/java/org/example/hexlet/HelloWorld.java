@@ -9,6 +9,11 @@ public class HelloWorld {
             config.bundledPlugins.enableDevLogging();
         });
 
+        app.get("/courses/{courseId}/lessons/{id}", ctx -> {
+            var courseId = ctx.pathParam("courseId");
+            var lessonId =  ctx.pathParam("id");
+            ctx.result("Course ID: " + courseId + " Lesson ID: " + lessonId);
+        });
         app.get("/users", ctx -> ctx.result("GET /users"));
         app.get("/hello", ctx -> {
             var name = ctx.queryParam("name");
