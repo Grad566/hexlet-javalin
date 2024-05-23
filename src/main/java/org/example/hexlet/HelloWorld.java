@@ -9,7 +9,8 @@ public class HelloWorld {
             config.bundledPlugins.enableDevLogging();
         });
 
-        app.get("/", ctx -> ctx.result("Hello world"));
+        app.get("/users", ctx -> ctx.result("GET /users"));
+        app.post("/users", ctx -> ctx.result("Post /users"));
         app.start(7070);
     }
 }
