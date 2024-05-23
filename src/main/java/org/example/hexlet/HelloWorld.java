@@ -10,6 +10,10 @@ public class HelloWorld {
         });
 
         app.get("/users", ctx -> ctx.result("GET /users"));
+        app.get("/hello", ctx -> {
+            var name = ctx.queryParam("name");
+            ctx.result("Hello " + name);
+        });
         app.post("/users", ctx -> ctx.result("Post /users"));
         app.start(7070);
     }
