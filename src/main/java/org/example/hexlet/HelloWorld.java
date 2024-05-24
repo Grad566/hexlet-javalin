@@ -14,8 +14,8 @@ import static io.javalin.rendering.template.TemplateUtil.model;
 public class HelloWorld {
     public static void main (String[] args) {
         List<Course> courses = new ArrayList<>();
-        var course1 = new Course("Lol", "Example1");
-        var course2 = new Course("Lol", "Example2");
+        var course1 = new Course("Lol", "Example1", 1L);
+        var course2 = new Course("Lol2", "Example2", 2L);
         courses.add(course1);
         courses.add(course2);
 
@@ -32,10 +32,28 @@ public class HelloWorld {
             ctx.result(escapedId);
         });
 
+        app.get("/courses/{courseId}", ctx -> {
+            var courseId = ctx.pathParamAsClass("courseId", Long.class).get();
+            var course = courses.stream()
+                    .filter(c -> c.getId().equals(courseId))
+                    .findFirst();
+            if (course.isPresent()) {
+                ctx.result(course.get().getDescription());
+            } else {
+                ctx.result("Курс не найден");
+            }
+        });
+
         app.get("/courses", ctx -> {
-            var header = "Курсы по программированию";
-            var page = new CoursesPage(courses, header);
-            ctx.render("courses/index.jte", model("page", page));
+            var term = ctx.queryParam("term");
+            List<Course> requiredCurses = new ArrayList<>();
+            if (term != null) {
+                requiredCurses = courses.stream()
+                        .filter(c -> c.getName().equals(term))
+                        .toList();
+            }
+            var page = new CoursesPage(requiredCurses, term);
+            ctx.render("courses/index2.jte", model("page", page));
         });
 
         app.get("/courses/{courseId}/lessons/{id}", ctx -> {
