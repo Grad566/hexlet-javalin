@@ -34,6 +34,9 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.32")
     testCompileOnly("org.projectlombok:lombok:1.18.32")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.32")
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-text
+    implementation("org.apache.commons:commons-text:1.12.0")
+
 
 }
 
