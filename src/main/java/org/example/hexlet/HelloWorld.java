@@ -3,8 +3,11 @@ package org.example.hexlet;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
 import org.example.hexlet.dto.courses.CoursesPage;
+import org.example.hexlet.dto.courses.UserPage;
 import org.example.hexlet.model.Course;
 import org.apache.commons.text.StringEscapeUtils;
+import org.example.hexlet.model.User;
+import org.example.hexlet.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,33 @@ public class HelloWorld {
         var app = Javalin.create(config -> {
             config.bundledPlugins.enableDevLogging();
             config.fileRenderer(new JavalinJte());
+        });
+
+        app.get("/users/build", ctx -> {
+            ctx.render("users/build.jte");
+        });
+
+        app.post("/users", ctx -> {
+            var name = ctx.formParam("name");
+            var email = ctx.formParam("email");
+            var password = ctx.formParam("password");
+
+            User user = new User(name, email, password);
+            UserRepository.save(user);
+            ctx.redirect("/users/search");
+        });
+
+        app.get("/users/search", ctx -> {
+            var term = ctx.queryParam("term");
+            List<User> requiredUsers = new ArrayList<>();
+            var currentUsers = UserRepository.getUsers();
+            if (term != null) {
+                requiredUsers = currentUsers.stream()
+                        .filter(c -> c.getName().equals(term))
+                        .toList();
+            }
+            var page = new UserPage(requiredUsers, term);
+            ctx.render("users/index.jte", model("page", page));
         });
 
         app.get("/users/{id}", ctx -> {
@@ -62,14 +92,10 @@ public class HelloWorld {
             ctx.result("Course ID: " + courseId + " Lesson ID: " + lessonId);
         });
 
-        app.get("/users", ctx -> ctx.result("GET /users"));
-
         app.get("/hello", ctx -> {
             var name = ctx.queryParam("name");
             ctx.result("Hello " + name);
         });
-
-        app.post("/users", ctx -> ctx.result("Post /users"));
 
         app.start(7070);
     }
