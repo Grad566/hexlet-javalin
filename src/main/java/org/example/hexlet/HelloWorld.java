@@ -2,6 +2,8 @@ package org.example.hexlet;
 
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
+import io.javalin.validation.ValidationException;
+import org.example.hexlet.dto.courses.BuildUserPage;
 import org.example.hexlet.dto.courses.CoursesPage;
 import org.example.hexlet.dto.courses.UserPage;
 import org.example.hexlet.model.Course;
@@ -29,17 +31,28 @@ public class HelloWorld {
         });
 
         app.get("/users/build", ctx -> {
-            ctx.render("users/build.jte");
+            var page = new BuildUserPage();
+            ctx.render("users/build.jte", model("page", page));
         });
 
         app.post("/users", ctx -> {
             var name = ctx.formParam("name");
             var email = ctx.formParam("email");
-            var password = ctx.formParam("password");
 
-            User user = new User(name, email, password);
-            UserRepository.save(user);
-            ctx.redirect("/users/search");
+            try {
+                var passwordConfirm = ctx.formParam("passwordConfirm");
+                var password = ctx.formParamAsClass("password", String.class)
+                        .check(value -> value.equals(passwordConfirm), "Пароли не совпадают")
+                        .check(value -> value.length() > 6, "У пароля недостаточная длина")
+                        .get();
+
+                User user = new User(name, email, password);
+                UserRepository.save(user);
+                ctx.redirect("/users/search");
+            } catch (ValidationException e) {
+                var page = new BuildUserPage(name, email, e.getErrors());
+                ctx.render("users/build.jte", model("page", page));
+            }
         });
 
         app.get("/users/search", ctx -> {
