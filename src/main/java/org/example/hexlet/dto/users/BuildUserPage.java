@@ -1,8 +1,7 @@
-package org.example.hexlet.dto.courses;
+package org.example.hexlet.dto.users;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import io.javalin.validation.ValidationError;
 import lombok.AllArgsConstructor;
@@ -16,5 +15,4 @@ public class BuildUserPage {
     private String name;
     private String email;
     private Map<String, List<ValidationError<Object>>> errors;
-
 }

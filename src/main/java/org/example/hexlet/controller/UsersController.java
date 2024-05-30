@@ -3,9 +3,8 @@ package org.example.hexlet.controller;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
 import org.example.hexlet.NamedRoutes;
-import org.example.hexlet.dto.courses.BuildUserPage;
-import org.example.hexlet.dto.courses.MainPage;
-import org.example.hexlet.dto.courses.UserPage;
+import org.example.hexlet.dto.users.BuildUserPage;
+import org.example.hexlet.dto.users.UserPage;
 import org.example.hexlet.model.User;
 import org.example.hexlet.repository.UserRepository;
 
@@ -57,13 +56,6 @@ public class UsersController {
         user.setPassword(password);
         UserRepository.save(user);
         ctx.redirect(NamedRoutes.usersPath());
-    }
-
-    public static void showCookie(Context ctx) {
-        var visited = Boolean.valueOf(ctx.cookie("visited"));
-        var page = new MainPage(visited);
-        ctx.render("users/coockie.jte", model("page", page));
-        ctx.cookie("visited", String.valueOf(true));
     }
 
 }
