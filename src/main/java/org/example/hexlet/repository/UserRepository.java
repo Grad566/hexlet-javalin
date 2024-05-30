@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Setter
@@ -66,6 +65,15 @@ public class UserRepository extends BaseRepository{
                 result.add(user);
             }
             return result;
+        }
+    }
+
+    public static void delete(Long id) throws SQLException{
+        var sql = "DELETE FROM users WHERE id = ?";
+        try (var conn = dataSource.getConnection();
+                var stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, String.valueOf(id));
+            stmt.executeUpdate();
         }
     }
 
