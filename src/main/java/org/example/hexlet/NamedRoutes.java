@@ -13,20 +13,9 @@ public class NamedRoutes {
         return "/users/build";
     }
 
-    public static String coursesPath() {
-        return "/courses";
-    }
 
     public static String usersSearchPath() {
         return "/users/search";
     }
 
-    // Это нужно, чтобы не преобразовывать типы снаружи
-    public static String coursePath(Long id) {
-        return coursePath(String.valueOf(id));
-    }
-
-    public static String coursePath(String id) {
-        return "/courses/" + id;
-    }
 }
