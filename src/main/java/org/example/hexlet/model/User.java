@@ -1,5 +1,6 @@
 package org.example.hexlet.model;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,4 +18,6 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+
 }
