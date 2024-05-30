@@ -1,3 +1,4 @@
+@import org.example.hexlet.NamedRoutes
 @import org.example.hexlet.dto.courses.UserPage
 @param UserPage page
 
@@ -12,7 +13,7 @@
 <body>
 <h1>Поисковик users</h1>
 
-<form action="/users/search" method="get">
+<form action="${NamedRoutes.usersSearchPath()}" method="get">
     <label for="searchTerm">Enter the term:</label>
     <input type="text" id="searchTerm" name="term" value="${page.getTerm()}"/>
     <button type="submit" class="btn btn-primary">Search</button>

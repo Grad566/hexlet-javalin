@@ -3,6 +3,7 @@ package org.example.hexlet;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
 import io.javalin.validation.ValidationException;
+import org.example.hexlet.controller.UsersController;
 import org.example.hexlet.dto.courses.BuildUserPage;
 import org.example.hexlet.dto.courses.CoursesPage;
 import org.example.hexlet.dto.courses.UserPage;
@@ -30,52 +31,15 @@ public class HelloWorld {
             config.fileRenderer(new JavalinJte());
         });
 
-        app.get("/users/build", ctx -> {
-            var page = new BuildUserPage();
-            ctx.render("users/build.jte", model("page", page));
-        });
+        app.get(NamedRoutes.rootsPath(), UsersController::showCookie);
 
-        app.post("/users", ctx -> {
-            var name = ctx.formParam("name");
-            var email = ctx.formParam("email");
+        app.get(NamedRoutes.buildUserPath(), UsersController::build);
 
-            try {
-                var passwordConfirm = ctx.formParam("passwordConfirm");
-                var password = ctx.formParamAsClass("password", String.class)
-                        .check(value -> value.equals(passwordConfirm), "Пароли не совпадают")
-                        .check(value -> value.length() > 6, "У пароля недостаточная длина")
-                        .get();
+        app.post(NamedRoutes.usersPath(), UsersController::create);
 
-                User user = new User(name, email, password);
-                UserRepository.save(user);
-                ctx.redirect("/users/search");
-            } catch (ValidationException e) {
-                var page = new BuildUserPage(name, email, e.getErrors());
-                ctx.render("users/build.jte", model("page", page));
-            }
-        });
+        app.get(NamedRoutes.usersSearchPath(), UsersController::index);
 
-        app.get("/users/search", ctx -> {
-            var term = ctx.queryParam("term");
-            List<User> requiredUsers = new ArrayList<>();
-            var currentUsers = UserRepository.getUsers();
-            if (term != null) {
-                requiredUsers = currentUsers.stream()
-                        .filter(c -> c.getName().equals(term))
-                        .toList();
-            }
-            var page = new UserPage(requiredUsers, term);
-            ctx.render("users/index.jte", model("page", page));
-        });
-
-        app.get("/users/{id}", ctx -> {
-            var id = ctx.pathParam("id");
-            var escapedId = StringEscapeUtils.escapeHtml4(id);
-            ctx.contentType("text/html");
-            ctx.result(escapedId);
-        });
-
-        app.get("/courses/{courseId}", ctx -> {
+        app.get(NamedRoutes.coursePath("{id}"), ctx -> {
             var courseId = ctx.pathParamAsClass("courseId", Long.class).get();
             var course = courses.stream()
                     .filter(c -> c.getId().equals(courseId))
@@ -87,7 +51,7 @@ public class HelloWorld {
             }
         });
 
-        app.get("/courses", ctx -> {
+        app.get(NamedRoutes.coursesPath(), ctx -> {
             var term = ctx.queryParam("term");
             List<Course> requiredCurses = new ArrayList<>();
             if (term != null) {
@@ -106,7 +70,7 @@ public class HelloWorld {
         });
 
         app.get("/hello", ctx -> {
-            var name = ctx.queryParam("name");
+            var name = ctx.queryParamAsClass("name", String.class).getOrDefault("world");
             ctx.result("Hello " + name);
         });
 

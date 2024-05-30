@@ -5,6 +5,7 @@ import lombok.Getter;
 import org.example.hexlet.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 @Getter

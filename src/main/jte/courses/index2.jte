@@ -1,3 +1,4 @@
+@import org.example.hexlet.NamedRoutes
 @import org.example.hexlet.dto.courses.CoursesPage
 @param CoursesPage page
 
@@ -12,7 +13,7 @@
     <body>
         <h1>Поисковик курсов</h1>
 
-        <form action="/courses" method="get">
+        <form action="${NamedRoutes.coursesPath()}" method="get">
             <label for="searchTerm">Enter the term:</label>
             <input type="text" id="searchTerm" name="term" value="${page.getTerm()}"/>
             <button type="submit" class="btn btn-primary">Search</button>
