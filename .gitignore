@@ -33,3 +33,5 @@ Thumbs.db
 
 # Compiled Gradle plugins and scripts
 buildSrc/build/
+
+jte-classes/
