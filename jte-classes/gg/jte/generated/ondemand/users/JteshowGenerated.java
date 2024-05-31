@@ -7,10 +7,10 @@ public final class JteshowGenerated {
 		jteOutput.writeContent("\r\n");
 		gg.jte.generated.ondemand.layout.JtepageGenerated.render(jteOutput, jteHtmlInterceptor, new gg.jte.html.HtmlContent() {
 			public void writeTo(gg.jte.html.HtmlTemplateOutput jteOutput) {
-				jteOutput.writeContent("\r\n    <div>Name: ");
+				jteOutput.writeContent("\r\n    <div class=\"col\">Name: ");
 				jteOutput.setContext("div", null);
 				jteOutput.writeUserContent(page.getUser().getName());
-				jteOutput.writeContent("</div>\r\n    <div>Email: ");
+				jteOutput.writeContent("</div>\r\n    <div class=\"col\">Email: ");
 				jteOutput.setContext("div", null);
 				jteOutput.writeUserContent(page.getUser().getEmail());
 				jteOutput.writeContent("</div>\r\n");

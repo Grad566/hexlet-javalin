@@ -2,7 +2,7 @@ package gg.jte.generated.ondemand.sessions;
 import org.example.hexlet.NamedRoutes;
 public final class JtebuildGenerated {
 	public static final String JTE_NAME = "sessions/build.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,2,2,2,2,2,4,4,5,5,5,5,5,5,5,5,5,16,16,16,16,16,16,16,16};
+	public static final int[] JTE_LINE_INFO = {0,0,2,2,2,2,2,4,4,5,5,5,5,5,5,5,5,5,20,20,20,20,20,20,20,20};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor) {
 		jteOutput.writeContent("\r\n");
 		gg.jte.generated.ondemand.layout.JtepageGenerated.render(jteOutput, jteHtmlInterceptor, new gg.jte.html.HtmlContent() {
@@ -16,7 +16,7 @@ public final class JtebuildGenerated {
 					jteOutput.setContext("form", null);
 					jteOutput.writeContent("\"");
 				}
-				jteOutput.writeContent(" method=\"post\">\r\n        <label>\r\n            Enter your NickName\r\n            <input type=\"text\" placeholder=\"Nickname\" name=\"nickname\">\r\n        </label>\r\n        <label>\r\n            Enter password\r\n            <input type=\"password\" placeholder=\"Password\" name=\"password\">\r\n        </label>\r\n        <input type=\"submit\">\r\n    </form>\r\n");
+				jteOutput.writeContent(" method=\"post\">\r\n        <div class=\"mb-3\">\r\n        <label class=\"form-label\">\r\n            Enter your NickName\r\n            <input class=\"form-control\" type=\"text\" placeholder=\"Nickname\" name=\"nickname\">\r\n        </label>\r\n        </div>\r\n        <div class=\"mb-3\">\r\n        <label class=\"form-label\">\r\n            Enter password\r\n            <input class=\"form-control\" type=\"password\" placeholder=\"Password\" name=\"password\">\r\n        </label>\r\n        </div>\r\n        <button type=\"submit\" class=\"btn btn-primary\">Sign In</button>\r\n    </form>\r\n");
 			}
 		}, null);
 	}
