@@ -35,7 +35,7 @@ public class HelloWorld {
             return reader.lines().collect(Collectors.joining("\n"));
         }
     }
-    public static void main (String[] args) throws SQLException, IOException {
+    public static void main(String[] args) throws SQLException, IOException {
         var app = getApp();
 
         app.start(getPort());

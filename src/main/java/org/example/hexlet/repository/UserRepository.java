@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Setter
 @Getter
-public class UserRepository extends BaseRepository{
+public class UserRepository extends BaseRepository {
     public static void save(User user) throws SQLException {
         var sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
         try (var conn = dataSource.getConnection();
@@ -68,7 +68,7 @@ public class UserRepository extends BaseRepository{
         }
     }
 
-    public static void delete(Long id) throws SQLException{
+    public static void delete(Long id) throws SQLException {
         var sql = "DELETE FROM users WHERE id = ?";
         try (var conn = dataSource.getConnection();
                 var stmt = conn.prepareStatement(sql)) {

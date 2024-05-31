@@ -3,15 +3,12 @@ package org.example.hexlet.controller;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
 import org.example.hexlet.NamedRoutes;
-import org.example.hexlet.dto.users.BuildUserPage;
 import org.example.hexlet.dto.users.UserPage;
 import org.example.hexlet.dto.users.UsersPage;
 import org.example.hexlet.model.User;
 import org.example.hexlet.repository.UserRepository;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static io.javalin.rendering.template.TemplateUtil.model;
 
