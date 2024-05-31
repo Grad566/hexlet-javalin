@@ -3,7 +3,7 @@
 
 @template.layout.page(
 content = @`
-    <div>Name: ${page.getUser().getName()}</div>
-    <div>Email: ${page.getUser().getEmail()}</div>
+    <div class="col">Name: ${page.getUser().getName()}</div>
+    <div class="col">Email: ${page.getUser().getEmail()}</div>
 `
 )

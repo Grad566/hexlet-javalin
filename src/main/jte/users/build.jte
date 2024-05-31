@@ -14,31 +14,31 @@ content = @`
     @endif
 
     <form action="/users" method="post">
-        <div>
-            <label>
+        <div class="mb-3">
+            <label class="form-label">
                 Name
-                <input type="text" name="name" value="${page.getName()}" />
+                <input class="form-control" type="text" name="name" value="${page.getName()}" />
             </label>
         </div>
-        <div>
-            <label>
+        <div class="mb-3">
+            <label class="form-label">
                 Email
-                <input type="email" required name="email" value="${page.getEmail()}" />
+                <input class="form-control" type="email" required name="email" value="${page.getEmail()}" />
             </label>
         </div>
-        <div>
-            <label>
+        <div class="mb-3">
+            <label class="form-label">
                 Password
-                <input type="password" required name="password" />
+                <input class="form-control" type="password" required name="password" />
             </label>
         </div>
-        <div>
-            <label>
+        <div class="mb-3">
+            <label class="form-label">
                 Password Confirmation
-                <input type="password" required name="passwordConfirmation" />
+                <input class="form-control" type="password" required name="passwordConfirmation" />
             </label>
         </div>
-        <input type="submit" value="Sign Up" />
+        <button type="submit" class="btn btn-primary">Sign Up</button>
     </form>
 `
 )

@@ -4,11 +4,14 @@
 
 @template.layout.page(
 content = @`
-    <a href="${NamedRoutes.buildUserPath()}">New User</a>
+    <div class="row">
+        <table class="table table-striped">
     @for(var user : page.getUsers())
-        <div>
-            <a href="${NamedRoutes.userPath(user.getId())}">${user.getName()}</a>
-        </div>
+            <tr class="table-info">
+                <td><a href="${NamedRoutes.userPath(user.getId())}">${user.getName()}</a></td>
+            </tr>
     @endfor
+        </table>
+    </div>
 `
 )

@@ -1,5 +1,35 @@
-# Ignore Gradle project-specific cache directory
-.gradle
+# IntelliJ IDEA
+.idea/
 
-# Ignore Gradle build output directory
-build
+# Gradle
+.gradle/
+build/
+
+# Compiled class file
+*.class
+
+# Log files
+*.log
+
+# IntelliJ project files
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/inspectionProfiles
+.idea/libraries
+.idea/modules.xml
+.idea/scopes
+
+# Gradle files
+.gradle
+build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Compiled Gradle plugins and scripts
+buildSrc/build/
